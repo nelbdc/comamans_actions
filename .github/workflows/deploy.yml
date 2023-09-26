@@ -38,8 +38,8 @@ jobs:
       - name: Load & cache dependencies
         id: cache-deps
         uses: ./.github/actions/cache-deps
-        with:
-          caching: "false"
+        # with:
+        #   caching: "false"
       - name: output information
         run: echo "cache used  ${{ steps.cache-deps.outputs.used-cache }}"
       - name: Build website
@@ -49,22 +49,8 @@ jobs:
         with:
           name: dist-files
           path: dist
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Get build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: dist-files
-          path: ./dist
-      - name: Output contents
-        run: ls
-      - name: Deploy site
-        run: echo "Deploying..."
-  information:
+  s3-bucket:
+    needs: [build]
     runs-on: ubuntu-latest
     environment: deploy
     steps:
