@@ -1,9 +1,15 @@
 name: "Get & cache dependencies"
 description: "Get the dependencies (via npm) and cache them."
+inputs:
+  caching:
+    required: false
+    description: This is a turn on or turn on the cahe method
+    default: "true"
 runs:
   using: composite
   steps:
     - name: Cache
+      if: inputs.caching == 'true'
       uses: actions/cache@v3
       with:
         path: node_modules
