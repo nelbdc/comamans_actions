@@ -69,4 +69,4 @@ jobs:
         with:
           bucket: custom-action
           bucket-region: us-east-2
-          dist-folder: dist-files
+          dist-folder: dist
