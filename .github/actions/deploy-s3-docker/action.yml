@@ -1,5 +1,23 @@
 name: Docker actions
 description: This is a custom action for Docker
+
+inputs:
+  bucket:
+    required: true
+    description: "Bucket name"
+  bucket-region:
+    required: false
+    description: "Bucket region"
+    default: "us-east-1"
+  dist-folder:
+    required: true
+    description: "Path for the artifact"
+    default: dist
+
+outputs:
+  url-website:
+    description: This is a url for the website
+
 runs:
   using: docker
   image: "Dockerfile"
