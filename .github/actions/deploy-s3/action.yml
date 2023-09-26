@@ -13,6 +13,10 @@ inputs:
     description: "Path for the artifact"
     default: dist
 
+outputs:
+  url-website:
+    description: This is a url for the website
+
 runs:
   using: "node20"
   main: "main.js"
