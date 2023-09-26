@@ -1,0 +1,5 @@
+name: Docker actions
+description: This is a custom action for Docker
+runs:
+  using: docker
+  image: "Dockerfile"
