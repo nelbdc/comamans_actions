@@ -1,5 +1,18 @@
 name: Deploy to s3
 description: This is an actions for deploy in s3
+inputs:
+  bucket:
+    required: true
+    description: "Bucket name"
+  bucket-region:
+    required: false
+    description: "Bucket region"
+    default: "us-east-1"
+  dist-folder:
+    required: true
+    description: "Path for the artifact"
+    default: dist
+
 runs:
   using: "node20"
   main: "main.js"
