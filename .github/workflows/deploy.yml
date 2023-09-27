@@ -53,6 +53,9 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     environment: deploy
+    permissions:
+      id-token: write # This is required for requesting the JWT
+      contents: read # This is required for actions/checkout
     steps:
       - name: Get code
         uses: actions/checkout@v3
@@ -61,11 +64,18 @@ jobs:
         with:
           name: dist-files
           path: ./dist
+
+      - name: Get aws permissions
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::498713340359:role/open-connect1
       - name: Custom js actions
         id: s3-deploy
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+        # env:
+        #   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        #   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         # uses: ./.github/actions/deploy-s3
         uses: ./.github/actions/deploy-s3-docker
         with:
